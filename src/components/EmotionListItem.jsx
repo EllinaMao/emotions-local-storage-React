@@ -19,7 +19,9 @@ class EmotionListItem extends Component {
                 <DeleteButton 
                 index={this.props.index} 
                 onDelete={onDelete} />
+                <p> {/*maybe empty, may be not*/} </p>
             </li>
+            
         );
     }
 }

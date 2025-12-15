@@ -26,21 +26,32 @@ class App extends Component {
     this.state = {
       currentEmotion: null,
       emotions: savedEmotions,
+      description: "",
     };
   }
 
+  handleDescriptionChange = (event) => {
+    this.setState({ description: event.target.value });
+  }
+
+  // handleDectriptionUpdate= (event) => {
+    
+  // }
   handleEmotionSelect = (emotion) => {
     this.setState((prevState) => {
       const newEntry = {
         name: emotion.name,
         color: emotion.color,
         date: new Date().toLocaleString(),
+        description: prevState.description || "", //add description, may be empty
       };
+
       const updatedEmotions = [...prevState.emotions, newEntry];
       localStorage.setItem("emotions", JSON.stringify(updatedEmotions));
       return {
         currentEmotion: emotion,
         emotions: updatedEmotions,
+        description: "", //clear description after adding
       };
     });
   };
@@ -54,35 +65,34 @@ class App extends Component {
       localStorage.setItem("emotions", JSON.stringify(updatedEmotions));
 
       //need to check upd emotions and currentEmotion
-      //to do - clean up to look shorter
-      //use ternar operator
-      //later
-      let lastEmotion;
-      if (updatedEmotions.length > 0) {
-        lastEmotion = updatedEmotions[updatedEmotions.length - 1];
-      }
-      else {
-        lastEmotion = null;
-      }
+      const lastEmotion = updatedEmotions.length > 0 
+        ? updatedEmotions[updatedEmotions.length - 1] 
+        : null;
 
       return {
         emotions: updatedEmotions,
         currentEmotion: lastEmotion
+        //description: ""? thinking
       };
     });
   }
+
+
   render() {
-    const { currentEmotion, emotions } = this.state;
+    const { currentEmotion, emotions, description } = this.state;
 
     const appStyle = {
       backgroundColor: currentEmotion ? currentEmotion.color : "#f0f0f0",
     };
-
+    //add text input in header when adding emotion
     return (
       <div className="app-container" style={appStyle}>
         <Header title="Emotional diary" />
 
         <div className="content">
+          {/*add text input for description here? its better if will be pop up but later maybe*/}
+          <input type="text" placeholder="Add your mood description (optional)" value={description} onChange={this.handleDescriptionChange}
+            className="emotion-input" />
           <div className="emotion-buttons">
             {EMOTIONS.map((emotion) => (
               <EmotionButton
@@ -91,6 +101,7 @@ class App extends Component {
                 onSelect={this.handleEmotionSelect}
               />
             ))}
+
           </div>
 
           <div className="emotion-list-container">

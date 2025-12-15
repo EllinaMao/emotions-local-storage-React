@@ -5,15 +5,18 @@
   flex-direction: column;
   transition: background-color 0.3s;
   font-family: Arial, sans-serif;
+  user-select: none;
+  transition: background-color 0.6s ease;
+
 }
- 
+
 /* ===== Header ===== */
 .header {
   text-align: center;
   padding: 15px 0;
   flex-shrink: 0;
 }
- 
+
 /* ===== Основной контент ===== */
 .content {
   flex: 1;
@@ -22,13 +25,13 @@
   padding: 0 20px;
   min-height: 0;
 }
- 
+
 /* ===== Кнопки эмоций ===== */
 .emotion-buttons {
   margin-bottom: 15px;
   flex-shrink: 0;
 }
- 
+
 .emotion-button {
   border: none;
   color: #fff;
@@ -39,42 +42,58 @@
   font-size: 16px;
   transition: transform 0.1s, opacity 0.1s;
 }
- 
+
 .emotion-button:hover {
   transform: scale(1.05);
   opacity: 0.9;
 }
- 
+
+/* ===== Input для описания эмоции ===== */
+.emotion-input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+  box-sizing: border-box;
+  user-select: text;
+}
+
 /* ===== Прокручиваемый контейнер списка ===== */
 .emotion-list-container {
   flex: 1;
   overflow-y: auto;
   padding-right: 10px;
+  user-select: none;
+
 }
- 
+
 /* ===== Список эмоций ===== */
 .emotion-list-title {
   margin: 0 0 10px 0;
 }
- 
+
 .emotion-list {
   list-style-type: none;
   padding: 0;
   margin: 0;
 }
- 
+
 .emotion-list-item {
   color: #fff;
   padding: 10px;
+  position: relative;
+  
   margin-bottom: 5px;
   border-radius: 5px;
   transition: opacity 0.2s;
 }
- 
+
 .emotion-list-item:hover {
   opacity: 0.8;
 }
- 
+
 /* ===== Footer ===== */
 .footer {
   padding: 10px 0;
@@ -83,23 +102,23 @@
   border-top: 1px solid rgba(0, 0, 0, 0.2);
   flex-shrink: 0;
 }
- 
+
 
 /* ===== Кнопка удаления ===== */
-.delete-button 
-{
+.delete-button {
   background-color: transparent;
   color: red;
   cursor: pointer;
-  margin-left: 10px;
+  /*to do - place it at right side of list item */
+  position: absolute;
+  right: 10px;
   border: 2px solid red;
   border-radius: 3px;
   padding: 2px 6px;
   font-size: 12px;
 }
 
-.delete-button:hover 
-{
+.delete-button:hover {
   background-color: red;
   color: #fff;
 }
