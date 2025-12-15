@@ -40,17 +40,27 @@ class App extends Component {
       };
     });
   };
-//need think a but more
+  //need think a but more
   handleDeleteEmotion = (index) => {
     this.setState((prevState) => {
       //remove item of deleted index
       const updatedEmotions = prevState.emotions.filter((_, i) => i !== index);
-      
+
       //upd localSt
       localStorage.setItem("emotions", JSON.stringify(updatedEmotions));
 
+      //need to check upd emotions and currentEmotion
+      let lastEmotion;
+      if (updatedEmotions.length > 0) {
+        lastEmotion = updatedEmotions[updatedEmotions.length - 1];
+      }
+      else {
+        lastEmotion = null;
+      }
+
       return {
         emotions: updatedEmotions,
+        currentEmotion: lastEmotion
       };
     });
   }
@@ -77,9 +87,9 @@ class App extends Component {
           </div>
 
           <div className="emotion-list-container">
-            <EmotionList 
-            emotions={emotions}
-            onDelete={this.handleDeleteEmotion} />
+            <EmotionList
+              emotions={emotions}
+              onDelete={this.handleDeleteEmotion} />
           </div>
         </div>
 
