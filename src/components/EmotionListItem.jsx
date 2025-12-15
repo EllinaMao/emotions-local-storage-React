@@ -3,6 +3,10 @@ import "../App.css";
 import DeleteButton from "./DeleteButton";
 
 //add X button to remove item from list
+//add text description and edit button
+
+//change button classes?
+//later
 
 class EmotionListItem extends Component {
     render() {
